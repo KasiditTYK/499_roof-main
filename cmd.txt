@@ -14,3 +14,4 @@ docker-compose start
 docker-compose down
 
 
+test
