@@ -1,0 +1,33 @@
+version: '3.3'
+services:
+  nodejs:
+    image: node:latest
+    working_dir: /usr/src/app
+    depends_on:
+      - postgis
+    volumes:
+      - ./nodejs:/usr/src/app
+    ports:
+      - 3100:3000
+    command: sh -c "npm i && npm i -g nodemon && nodemon"
+
+  postgis:
+    image: postgis/postgis
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=geodb
+    ports:
+      - 5433:5432
+    volumes:
+      - ./postgis:/docker-entrypoint-initdb.d
+
+  python:
+    build:
+      context: ./python/
+      dockerfile: Dockerfile
+    volumes:
+      - ./python:/mnt
+    ports:
+      - 5100:5000

@@ -1,0 +1,16 @@
+#start docker
+docker-compose up 
+
+# cancel docker
+ctrl+ c
+or
+docker-compose stop
+
+# restart docker 
+docker-compose restart
+docker-compose start
+
+#remove docker
+docker-compose down
+
+
